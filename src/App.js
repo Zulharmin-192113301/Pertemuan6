@@ -32,6 +32,22 @@ class App extends Component {
     }}>Logout</button>
 ))
 
+const routes = [{
+  path : '/',
+  exact : true,
+  render : ()=> <div>Ini halaman Home</div>
+},{
+  path : '/news',
+  render : ()=> <div>Ini halaman News</div>
+},{
+  path : '/login',
+  render : ()=> <LoginButton />
+},{
+  path : '/profile',
+  render : ()=> this.state.isAuth ? <div>Ini halaman Profile <br /><LogoutButton /></div> : <Redirect to='/login' />
+}]
+
+
     return (
       <Router>
         <div>
@@ -42,10 +58,11 @@ class App extends Component {
           </ul>
 
         <Switch>
-            <Route path='/' exact render={() => <div>Halaman Home ya</div>} />
-            <Route path='/news' render={() => <div>Kalo ini halaman News</div>} />
-            <Route path='/login' render={()=> <LoginButton /> } />
-            <Route path='/profile' render={()=> this.state.isAuth ? <div>Ini halaman Profile <br /> <LogoutButton /> </div> : <Redirect to='/login' />} />
+        {
+              routes.map((item, index)=>(
+                <Route path={item.path} exact={item.exact} render={item.render} />
+              ))
+            }
         </Switch>
 
         </div>
