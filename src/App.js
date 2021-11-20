@@ -4,7 +4,8 @@ import {
   Route,
   Link,
   Switch,
-  Redirect
+  Redirect,
+  withRouter
 } from 'react-router-dom';
 
 class App extends Component {
@@ -17,6 +18,20 @@ class App extends Component {
 
 
   render() {
+    const LoginButton = withRouter(({history}) => (
+      <button onClick={()=>{
+        this.setState({isAuth : true})
+        history.push('/profile')
+      }}>Login</button>
+  ))
+
+  const LogoutButton = withRouter(({history}) => (
+    <button onClick={()=>{
+      this.setState({isAuth : false})
+      history.push('/login')
+    }}>Logout</button>
+))
+
     return (
       <Router>
         <div>
@@ -29,8 +44,8 @@ class App extends Component {
         <Switch>
             <Route path='/' exact render={() => <div>Halaman Home ya</div>} />
             <Route path='/news' render={() => <div>Kalo ini halaman News</div>} />
-            <Route path='/login' render={()=> <div> <button>Login</button></div>} />
-              <Route path='/profile' render={()=> this.state.isAuth ? <div>Ini halaman Profile</div> : <Redirect to='/login' />} />
+            <Route path='/login' render={()=> <LoginButton /> } />
+            <Route path='/profile' render={()=> this.state.isAuth ? <div>Ini halaman Profile <br /> <LogoutButton /> </div> : <Redirect to='/login' />} />
         </Switch>
 
         </div>
