@@ -48,3 +48,8 @@ color : rgb(197, 165, 197); font-size: 18px;
 
 .content-text{ padding: 20px; font-size: 14px; color:#888;
 }
+
+.active-link{
+  font-weight: bold;
+  color: rgb(162, 0, 255);
+}

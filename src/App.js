@@ -5,7 +5,8 @@ import {
   Link,
   Switch,
   Redirect,
-  withRouter
+  withRouter,
+  NavLink
 } from 'react-router-dom';
 
 class App extends Component {
@@ -52,9 +53,9 @@ const routes = [{
       <Router>
         <div>
           <ul style={{listStyle: 'none'}}>
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/news'>News</Link></li>
-            <li><Link to='/profile'>Profile</Link></li>
+          <li><NavLink exact activeStyle={{fontWeight: 'bold', color: 'red'}} to='/'>Home</NavLink></li>
+            <li><NavLink activeClassName='active-link' to='/news'>News</NavLink></li>
+            <li><NavLink activeClassName='active-link' to='/profile'>Profile</NavLink></li>
           </ul>
 
         <Switch>
